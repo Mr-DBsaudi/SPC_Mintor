@@ -1225,7 +1225,7 @@
 
   // ── Google Sheets Web App URL ──
   // استبدل هذا الرابط برابط نشر Apps Script الخاص بك
-  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyR7Otqsj1lTDQukCszPZCiwijXr95vjOgfjnmdcBnw3iVQRt3YSp_aV2pBGmMKhdZVxg/exec';
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwr4SBrFU82MJbHZLH0tLmLiNTA0yFwBQEwZXh5zYUYUeYaGLf6BuUdyrydhDmU85G-/exec';
 
   // ── Submit ──
   async function submitForm() {
@@ -1270,11 +1270,10 @@
 
     try {
       if (SHEET_URL !== '') {
-        await fetch(SHEET_URL, {
-          method:  'POST',
-          mode:    'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify(payload)
+        const params = new URLSearchParams(payload);
+        await fetch(SHEET_URL + '?' + params.toString(), {
+          method: 'GET',
+          mode:   'no-cors'
         });
       }
       // Show success
